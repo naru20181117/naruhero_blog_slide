@@ -40,7 +40,7 @@ export default {
       lines: [],
     };
   },
-  updated() {
+  mounted() {
     Reveal.initialize({
       plugins: [ Markdown ],
       markdown: {
@@ -48,7 +48,7 @@ export default {
       }
     })
   },
-  async mounted() {
+  async created() {
     let uri = window.location.search.substring(1)
     let params = new URLSearchParams(uri)
     await createClient()
@@ -62,8 +62,6 @@ export default {
         this.lines = this.body.split(/\r?\n---\r?\n/)
         this.image = post.fields.postImage.fields.file.url
       });
-      console.log(process.env.VUE_APP_CTF_BLOG_POST_TYPE_ID)
-      console.log(this.$route.query.id)
   }
 }
 </script>
