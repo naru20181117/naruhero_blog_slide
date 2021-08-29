@@ -7,7 +7,7 @@
           <img :src="image">
         </section>
         <section v-for="line in lines" :key="line">
-          <section><vue-markdown-it :source="line" /></section>
+          <section><vue-markdown-it :html="true" :breaks="true" :linkify="true" :source="line" /></section>
         </section>
         <end></end>
       </div>
@@ -38,15 +38,11 @@ export default {
       title: null,
       body: null,
       lines: [],
+      html: true,
+      linkify: true,
+      breaks: true,
+      typographer: true
     };
-  },
-  mounted() {
-    Reveal.initialize({
-      plugins: [ Markdown ],
-      markdown: {
-        smartypants: true
-      }
-    })
   },
   async created() {
     let uri = window.location.search.substring(1)
@@ -62,7 +58,15 @@ export default {
         this.lines = this.body.split(/\r?\n---\r?\n/)
         this.image = post.fields.postImage.fields.file.url
       });
-  }
+  },
+  mounted() {
+    Reveal.initialize({
+      plugins: [ Markdown ],
+      markdown: {
+        smartypants: true
+      }
+    })
+  },
 }
 </script>
 
@@ -83,6 +87,7 @@ export default {
 }
 
 img {
-  width: 250px;
+  max-height: 350px !important;
+  max-width: 450px !important;
 }
 </style>
