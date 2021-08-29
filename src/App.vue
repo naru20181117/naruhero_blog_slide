@@ -3,11 +3,18 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          <h2>{{title }}</h2>
+          <h2>{{ title }}</h2>
           <img :src="image">
         </section>
         <section v-for="line in lines" :key="line">
-          <section><vue-markdown-it :html="true" :breaks="true" :linkify="true" :source="line" /></section>
+          <section>
+            <vue-markdown-it
+              :html="true"
+              :breaks="true"
+              :linkify="true"
+              :source="line"
+            />
+          </section>
         </section>
         <end></end>
       </div>
@@ -38,10 +45,6 @@ export default {
       title: null,
       body: null,
       lines: [],
-      html: true,
-      linkify: true,
-      breaks: true,
-      typographer: true
     };
   },
   async created() {
@@ -49,10 +52,10 @@ export default {
     let params = new URLSearchParams(uri)
     await createClient()
       .getEntry(
+        // ブログからパラメーターを投げて表示
         params.get("entry_id")
       )
       .then(post => {
-        this.post = post
         this.title = post.fields.title
         this.body = post.fields.body
         this.lines = this.body.split(/\r?\n---\r?\n/)
@@ -72,7 +75,9 @@ export default {
 
 <style>
 @import url('../node_modules/reveal.js/dist/reveal.css');
-@import url('../node_modules/reveal.js/dist/theme/black.css');
+/* ここでテーマを選ぶ */
+@import url('../node_modules/reveal.js/dist/theme/beige.css');
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -89,5 +94,11 @@ export default {
 img {
   max-height: 350px !important;
   max-width: 450px !important;
+}
+
+/* 部分的に大きくしたい画像にはimg-largeを仕込む */
+.img-large {
+  max-height: 550px !important;
+  max-width: 850px !important;
 }
 </style>
