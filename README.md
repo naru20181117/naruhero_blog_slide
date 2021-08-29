@@ -1,4 +1,4 @@
-# naruhero_blog_slide
+# slide_for_blog
 
 ## Status
 
