@@ -68,6 +68,7 @@ export default {
       markdown: {
         smartypants: true
       },
+      slideNumber: "c/t", // Flattened slide number / total slides
       transition: 'fade-in',
       transitionSpeed: 'fast'
     })
