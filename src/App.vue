@@ -67,7 +67,9 @@ export default {
       plugins: [ Markdown ],
       markdown: {
         smartypants: true
-      }
+      },
+      transition: 'fade-in',
+      transitionSpeed: 'fast'
     })
   },
 }
